@@ -1,5 +1,18 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import base64
+
+def autoplay_audio(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+    b64 = base64.b64encode(data).decode()
+    st.markdown(f"""
+    <audio autoplay loop style="display:none;">
+        <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+    </audio>
+    """, unsafe_allow_html=True)
+
+autoplay_audio("static/music/song.mp3")
 
 st.set_page_config(page_title="A question for you 💕", page_icon="💕", layout="centered")
 
