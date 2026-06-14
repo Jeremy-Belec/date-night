@@ -300,7 +300,7 @@ elif st.session_state.choice == "out":
 final_messages = {
     "cozy_a": "🎮 Games, cuddles and 1981 — the most perfect soft evening. I'm already excited 🥰",
     "cozy_b": "🎬 Oppenheimer, vodka, and the presentation… a whole experience. Let's do it 🥃",
-    "out_a":  "🍕 Back to where it all started — Mal Nécessaire, chicken pizza and us. I love this 💕",
+    "out_a":  "🍕 Back to where it all started — Bar Mal Nécessaire, chicken pizza and us. I love this 💕",
     "out_b":  "🎤 Karaoke it is! Can't wait to hear you sing your heart out 🎶✨",
 }
 
