@@ -82,15 +82,55 @@ div[data-testid="column"]:last-child button {
 
 # ── Background music (YouTube embed, no file needed) ──────────────────────────
 components.html("""
-<iframe
-    src="https://www.youtube.com/embed/HgzGwKwLmgM?autoplay=1&loop=1&playlist=HgzGwKwLmgM&controls=0&mute=0"
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap');
+    .music-bar {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    .music-btn {
+        background: linear-gradient(135deg, #fce4ec, #ede7f6);
+        border: 1.5px solid #f48fb1;
+        border-radius: 20px;
+        padding: 0.5rem 1.5rem;
+        font-family: 'Lora', serif;
+        font-size: 0.9rem;
+        color: #880e4f;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+    .music-btn:hover { opacity: 0.8; }
+    .music-label {
+        font-family: 'Lora', serif;
+        color: #a07090;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+    }
+</style>
+
+<div class="music-bar">
+    <button class="music-btn" onclick="startMusic()" id="playBtn">
+        🎵 Play our song
+    </button>
+    <div class="music-label" id="musicLabel">Je te laisserai des mots — Patrick Watson</div>
+</div>
+
+<iframe id="yt"
+    src=""
     allow="autoplay"
     style="width:1px;height:1px;position:fixed;top:-100px;left:-100px;border:none;">
 </iframe>
-<div style="text-align:center; font-family:serif; color:#a07090; font-size:0.85rem;">
-    🎵 Je te laisserai des mots — Patrick Watson
-</div>
-""", height=40)
+
+<script>
+    function startMusic() {
+        document.getElementById('yt').src =
+            "https://www.youtube.com/embed/HgzGwKwLmgM?autoplay=1&loop=1&playlist=HgzGwKwLmgM&controls=0";
+        document.getElementById('playBtn').textContent = '🎵 Playing…';
+        document.getElementById('playBtn').disabled = true;
+        document.getElementById('playBtn').style.opacity = '0.6';
+    }
+</script>
+""", height=80)
 
 # ── Session state init ────────────────────────────────────────────────────────
 for key in ["choice", "suboption", "verdict_clicked"]:
