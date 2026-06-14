@@ -306,15 +306,15 @@ if st.session_state.suboption:
             const colors = ['#f48fb1','#b39ddb','#fce4ec','#ff8fab','#c77dff','#ffccd5','#ffd6e0'];
             const particles = [];
             function spawnBurst(x, y) {
-                for (let i = 0; i < 80; i++) {
+                for (let i = 0; i < 150; i++) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = 2 + Math.random() * 5;
+                    const speed = 4 + Math.random() * 8;
                     particles.push({ x, y,
                         vx: Math.cos(angle) * speed,
                         vy: Math.sin(angle) * speed,
                         alpha: 1,
                         color: colors[Math.floor(Math.random() * colors.length)],
-                        radius: 3 + Math.random() * 3
+                        radius: 4 + Math.random() * 5
                     });
                 }
             }
