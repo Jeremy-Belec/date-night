@@ -378,8 +378,7 @@ if st.session_state.suboption:
                style="background: linear-gradient(135deg, #f48fb1, #b39ddb);
                       color: white; text-decoration: none; padding: 0.8rem 2rem;
                       border-radius: 14px; font-family: 'Lora', serif; font-size: 1.05rem;">
-                press here to get redirected to let <br>
-                me know what you picked Laurinka
+                press here to get redirect to let me know what you picked Laurinka
             </a>
         </div>
         """, unsafe_allow_html=True)
