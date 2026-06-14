@@ -218,6 +218,10 @@ def img_to_b64(path):
 
 slideshow_photos = [
     "static/photos/picture_window.jpg",
+    "static/photos/picture_red_dress_back.jpg",
+    "static/photos/picture_selfie1.jpg",
+    "static/photos/picture_smile.jpg",
+    "static/photos/picture_selfie2.jpg",
     # Add as many photos as you want here:
     # "static/photos/another_photo.jpg",
     # "static/photos/another_photo2.jpg",
