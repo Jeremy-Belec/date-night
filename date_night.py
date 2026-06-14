@@ -336,9 +336,9 @@ if st.session_state.suboption:
                     if (p.alpha <= 0) { particles.splice(i, 1); continue; }
                     ctx.globalAlpha = p.alpha;
                     ctx.fillStyle   = p.color;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fill();
+                    
+                    ctx.font = `${p.radius * 4}px serif`;
+                    ctx.fillText('♥', p.x, p.y);
                 }
                 ctx.globalAlpha = 1;
                 requestAnimationFrame(animate);
