@@ -209,10 +209,78 @@ nebo bys udělal/a něco útulného? (V obou případech budeme do půlnoci v po
 </p>
 """, unsafe_allow_html=True)
 
-# ── Top photo ─────────────────────────────────────────────────────────────────
+# ── Top photo slideshow ───────────────────────────────────────────────────────
+
+# Load all slideshow photos as base64 so they work on Streamlit Cloud
+def img_to_b64(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+slideshow_photos = [
+    "static/photos/picture_window.jpg",
+    # Add as many photos as you want here:
+    # "static/photos/another_photo.jpg",
+    # "static/photos/another_photo2.jpg",
+]
+
+slides_b64 = [img_to_b64(p) for p in slideshow_photos]
+slides_json = str(slides_b64).replace("'", '"')
+
 col_l, col_img, col_r = st.columns([1, 2, 1])
 with col_img:
-    st.image("static/photos/picture_window.jpg", use_container_width=True)
+    components.html(f"""
+    <style>
+        .slideshow-container {{
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+        }}
+        .slide {{
+            display: none;
+            width: 100%;
+        }}
+        .slide img {{
+            width: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+        }}
+        .slide.active {{
+            display: block;
+            animation: fadein 1.2s ease;
+        }}
+        @keyframes fadein {{
+            from {{ opacity: 0; }}
+            to   {{ opacity: 1; }}
+        }}
+    </style>
+
+    <div class="slideshow-container" id="slideshow">
+    </div>
+
+    <script>
+        const photos = {slides_json};
+        const container = document.getElementById('slideshow');
+
+        // Build slide elements
+        photos.forEach((b64, i) => {{
+            const div = document.createElement('div');
+            div.className = 'slide' + (i === 0 ? ' active' : '');
+            div.innerHTML = '<img src="data:image/jpeg;base64,' + b64 + '" />';
+            container.appendChild(div);
+        }});
+
+        let current = 0;
+        function nextSlide() {{
+            const slides = document.querySelectorAll('.slide');
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }}
+
+        setInterval(nextSlide, 2000);
+    </script>
+    """, height=350)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
