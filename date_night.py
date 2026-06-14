@@ -143,7 +143,7 @@ if existing_photos:
             object-fit: contain;
             display: block;
         }}
-        .slide.active {{ display: block; animation: fadein 2.5s ease; }}
+        .slide.active {{ display: block; animation: fadein 4.0s ease; }}
         @keyframes fadein {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
     </style>
     <div class="slideshow-container" id="slideshow"></div>
