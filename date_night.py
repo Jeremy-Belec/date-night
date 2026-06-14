@@ -180,7 +180,7 @@ if existing_photos:
             originalNext();
             setTimeout(resizeToImage, 100);
         }}
-        setInterval(nextSlideWithResize, 6000);
+        setInterval(nextSlideWithResize, 4000);
 
         // Resize on first load
         window.addEventListener('load', () => setTimeout(resizeToImage, 200));
