@@ -133,33 +133,59 @@ if existing_photos:
     col_l, col_img, col_r = st.columns([1, 2, 1])
     with col_img:
         components.html(f"""
-        <style>
-            .slideshow-container {{ position: relative; width: 100%; border-radius: 16px; overflow: hidden; }}
-            .slide {{ display: none; width: 100%; }}
-            .slide img {{ width: 100%; border-radius: 16px; object-fit: cover; }}
-            .slide.active {{ display: block; animation: fadein 1.2s ease; }}
-            @keyframes fadein {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
-        </style>
-        <div class="slideshow-container" id="slideshow"></div>
-        <script>
-            const photos = {slides_json};
-            const container = document.getElementById('slideshow');
-            photos.forEach((b64, i) => {{
-                const div = document.createElement('div');
-                div.className = 'slide' + (i === 0 ? ' active' : '');
-                div.innerHTML = '<img src="data:image/jpeg;base64,' + b64 + '" />';
-                container.appendChild(div);
-            }});
-            let current = 0;
-            function nextSlide() {{
-                const slides = document.querySelectorAll('.slide');
-                slides[current].classList.remove('active');
-                current = (current + 1) % slides.length;
-                slides[current].classList.add('active');
+    <style>
+        .slideshow-container {{ position: relative; width: 100%; border-radius: 16px; overflow: hidden; }}
+        .slide {{ display: none; width: 100%; }}
+        .slide img {{
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            object-fit: contain;
+            display: block;
+        }}
+        .slide.active {{ display: block; animation: fadein 1.2s ease; }}
+        @keyframes fadein {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+    </style>
+    <div class="slideshow-container" id="slideshow"></div>
+    <script>
+        const photos = {slides_json};
+        const container = document.getElementById('slideshow');
+        photos.forEach((b64, i) => {{
+            const div = document.createElement('div');
+            div.className = 'slide' + (i === 0 ? ' active' : '');
+            div.innerHTML = '<img src="data:image/jpeg;base64,' + b64 + '" />';
+            container.appendChild(div);
+        }});
+        let current = 0;
+        function nextSlide() {{
+            const slides = document.querySelectorAll('.slide');
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }}
+
+        // Auto-resize the iframe height to fit the image naturally
+        function resizeToImage() {{
+            const img = container.querySelector('.slide.active img');
+            if (img && img.complete) {{
+                const ratio = img.naturalHeight / img.naturalWidth;
+                const width = container.offsetWidth;
+                window.frameElement.style.height = Math.round(width * ratio) + 'px';
             }}
-            setInterval(nextSlide, 2000);
-        </script>
-        """, height=350)
+        }}
+
+        // Resize on each slide change
+        const originalNext = nextSlide;
+        function nextSlideWithResize() {{
+            originalNext();
+            setTimeout(resizeToImage, 100);
+        }}
+        setInterval(nextSlideWithResize, 2000);
+
+        // Resize on first load
+        window.addEventListener('load', () => setTimeout(resizeToImage, 200));
+    </script>
+    """, height=500)
 else:
     st.markdown("""
     <div style="text-align:center; color:#c9a0b8; font-size:0.85rem; margin-bottom:1rem;">
