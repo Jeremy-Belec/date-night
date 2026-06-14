@@ -143,7 +143,7 @@ if existing_photos:
             object-fit: contain;
             display: block;
         }}
-        .slide.active {{ display: block; animation: fadein 4.0s ease; }}
+        .slide.active {{ display: block; animation: fadein 2.0s ease; }}
         @keyframes fadein {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
     </style>
     <div class="slideshow-container" id="slideshow"></div>
@@ -180,7 +180,7 @@ if existing_photos:
             originalNext();
             setTimeout(resizeToImage, 100);
         }}
-        setInterval(nextSlideWithResize, 2000);
+        setInterval(nextSlideWithResize, 6000);
 
         // Resize on first load
         window.addEventListener('load', () => setTimeout(resizeToImage, 200));
