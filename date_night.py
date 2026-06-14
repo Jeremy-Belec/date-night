@@ -472,4 +472,5 @@ if st.session_state.suboption:
         </div>
         """, unsafe_allow_html=True)
 
-st.markdown('<div class="footer">Vyrobeno s vášní, jen pro vás 💕</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">💕 Vyrobeno s vášní, jen pro vás 💕<br>
+ PS: ma mère nous a cuisiné une surprise </div>', unsafe_allow_html=True)
