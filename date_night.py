@@ -394,8 +394,7 @@ if st.session_state.suboption:
             }
 
             function animate() {
-                ctx.fillStyle = 'rgba(0,0,0,0.07)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 // Draw rockets
                 for (let i = rockets.length - 1; i >= 0; i--) {
