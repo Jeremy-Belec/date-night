@@ -149,8 +149,8 @@ st.markdown('<div class="hearts">♥ ♥ ♥</div>', unsafe_allow_html=True)
 st.title("Kočičko, mám na tebe důležitou otázku…")
 st.markdown("""
 <p class="subtitle">
-Raději bys šel/šla ven, <br>
-nebo bys udělal/a něco útulného? (V obou případech budeme do půlnoci v posteli)
+Raději bys šel ven, nebo bys udělal něco příjemného? <br>
+(V obou případech se můžeme navzájem zapálit plynem, do půlnoci budeme v posteli.)
 </p>
 """, unsafe_allow_html=True)
 
