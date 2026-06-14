@@ -348,47 +348,105 @@ if st.session_state.suboption:
             const ctx    = canvas.getContext('2d');
             canvas.width  = window.innerWidth;
             canvas.height = window.innerHeight;
-            const colors = ['#f48fb1','#b39ddb','#fce4ec','#ff8fab','#c77dff','#ffccd5','#ffd6e0'];
-            const particles = [];
-            function spawnBurst(x, y) {
-                for (let i = 0; i < 150; i++) {
+
+            const colors = ['#f48fb1','#b39ddb','#ff8fab','#c77dff','#ffccd5','#ffd6e0','#ffffff'];
+            const rockets    = [];
+            const particles  = [];
+
+            // Rocket that flies up then explodes
+            function spawnRocket() {
+                rockets.push({
+                    x: 100 + Math.random() * (canvas.width - 200),
+                    y: canvas.height,
+                    vy: -(9 + Math.random() * 6),
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    targetY: 60 + Math.random() * (canvas.height * 0.45)
+                });
+            }
+
+            // Explosion: mix of circle sparks and hearts
+            function explode(x, y, color) {
+                for (let i = 0; i < 120; i++) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = 4 + Math.random() * 8;
-                    particles.push({ x, y,
+                    const speed = 1.5 + Math.random() * 7;
+                    const isHeart = Math.random() < 0.35; // 35% hearts, 65% sparks
+                    particles.push({
+                        x, y,
                         vx: Math.cos(angle) * speed,
                         vy: Math.sin(angle) * speed,
                         alpha: 1,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        radius: 4 + Math.random() * 5
+                        color,
+                        radius: isHeart ? 6 + Math.random() * 6 : 3 + Math.random() * 4,
+                        isHeart
                     });
                 }
             }
-            let bursts = 0;
-            function launchRandom() {
-                if (bursts >= 14) return;
-                spawnBurst(
-                    100 + Math.random() * (canvas.width - 200),
-                    50  + Math.random() * (canvas.height * 0.6)
-                );
-                bursts++;
-                setTimeout(launchRandom, 300);
+
+            function drawHeart(x, y, size) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.beginPath();
+                ctx.moveTo(0, -size * 0.5);
+                ctx.bezierCurveTo( size,  -size * 1.2,  size * 1.8,  size * 0.5, 0,  size * 1.2);
+                ctx.bezierCurveTo(-size * 1.8,  size * 0.5, -size, -size * 1.2, 0, -size * 0.5);
+                ctx.fill();
+                ctx.restore();
             }
+
             function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(0,0,0,0.07)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Draw rockets
+                for (let i = rockets.length - 1; i >= 0; i--) {
+                    const r = rockets[i];
+                    r.y += r.vy;
+                    // Rocket trail
+                    ctx.globalAlpha = 0.9;
+                    ctx.fillStyle = r.color;
+                    ctx.beginPath();
+                    ctx.arc(r.x, r.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    // Explode when reaching target
+                    if (r.y <= r.targetY) {
+                        explode(r.x, r.y, r.color);
+                        rockets.splice(i, 1);
+                    }
+                }
+
+                // Draw particles
                 for (let i = particles.length - 1; i >= 0; i--) {
                     const p = particles[i];
-                    p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.alpha -= 0.016;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.07;
+                    p.alpha -= 0.013;
                     if (p.alpha <= 0) { particles.splice(i, 1); continue; }
                     ctx.globalAlpha = p.alpha;
                     ctx.fillStyle   = p.color;
-                    
-                    ctx.font = `${p.radius * 4}px serif`;
-                    ctx.fillText('♥', p.x, p.y);
+                    if (p.isHeart) {
+                        drawHeart(p.x, p.y, p.radius);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
                 }
+
                 ctx.globalAlpha = 1;
                 requestAnimationFrame(animate);
             }
-            launchRandom();
+
+            // Launch rockets one by one
+            let launched = 0;
+            function launchNext() {
+                if (launched >= 12) return;
+                spawnRocket();
+                launched++;
+                setTimeout(launchNext, 400);
+            }
+
+            launchNext();
             animate();
         </script>
         """, height=220)
