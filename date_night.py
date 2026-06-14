@@ -150,7 +150,7 @@ st.title("Kočičko, mám na tebe důležitou otázku…")
 st.markdown("""
 <p class="subtitle">
 Raději bys šel ven, nebo bys udělal něco příjemného? <br>
-(V obou případech se můžeme navzájem zapálit plynem, do půlnoci budeme v posteli.)
+(V obou případech se můžeme navzájem zapálit plynem, do půlnoci budeme v posteli !)
 </p>
 """, unsafe_allow_html=True)
 
