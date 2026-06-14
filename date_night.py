@@ -373,12 +373,18 @@ if st.session_state.suboption:
             st.image("static/photos/family_picture.jpg", use_container_width=True)
 
         st.markdown("""
-        <div style="text-align:center; margin-top:1.5rem;">
+        <div style="text-align:center; margin-top:1.5rem; padding: 0 1rem;">
             <a href="https://www.instagram.com/jay.belec/" target="_blank"
-               style="background: linear-gradient(135deg, #f48fb1, #b39ddb);
-                      color: white; text-decoration: none; padding: 0.8rem 2rem;
-                      border-radius: 14px; font-family: 'Lora', serif; font-size: 1.05rem;">
-                press here to get redirect to let me know what you picked Laurinka
+               style="display: block;
+                      background: linear-gradient(135deg, #f48fb1, #b39ddb);
+                      color: white; text-decoration: none;
+                      padding: 1rem 1.5rem;
+                      border-radius: 14px;
+                      font-family: 'Lora', serif;
+                      font-size: 1rem;
+                      line-height: 1.5;
+                      word-wrap: break-word;">
+                Press here to let me know what you picked Laurinka 💕
             </a>
         </div>
         """, unsafe_allow_html=True)
