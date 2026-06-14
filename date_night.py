@@ -270,7 +270,7 @@ if st.session_state.choice == "cozy":
 
     col3, col4 = st.columns(2)
     with col3:
-        if st.button("✨ Option A — Light\n\n1981, games & cuddles", use_container_width=True):
+        if st.button("✨ Option A (Light) :\n\n1981, games & cuddles", use_container_width=True):
             st.session_state.suboption = "cozy_a"
     with col4:
         if st.button("🥃 Option B — Deep\n\nOppenheimer + vodka & the presentation", use_container_width=True):
