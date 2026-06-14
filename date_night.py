@@ -117,7 +117,7 @@ components.html(f"""
 
 <div class="music-bar">
     <button class="music-btn" onclick="startMusic()" id="playBtn">
-        🎵 Play our song
+        🎵 Press to play the song
     </button>
     <div class="music-label">Je te laisserai des mots — Patrick Watson</div>
 </div>
