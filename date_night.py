@@ -81,14 +81,21 @@ div[data-testid="column"]:last-child button {
 """, unsafe_allow_html=True)
 
 # ── Background music (YouTube embed, no file needed) ──────────────────────────
-components.html("""
+# Load song.mp3 as base64
+song_b64 = ""
+song_path = "static/music/song.mp3"
+if os.path.exists(song_path):
+    with open(song_path, "rb") as f:
+        song_b64 = base64.b64encode(f.read()).decode()
+
+components.html(f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap');
-    .music-bar {
+    .music-bar {{
         text-align: center;
         margin-bottom: 0.5rem;
-    }
-    .music-btn {
+    }}
+    .music-btn {{
         background: linear-gradient(135deg, #fce4ec, #ede7f6);
         border: 1.5px solid #f48fb1;
         border-radius: 20px;
@@ -98,37 +105,35 @@ components.html("""
         color: #880e4f;
         cursor: pointer;
         transition: opacity 0.3s;
-    }
-    .music-btn:hover { opacity: 0.8; }
-    .music-label {
+    }}
+    .music-btn:hover {{ opacity: 0.8; }}
+    .music-label {{
         font-family: 'Lora', serif;
         color: #a07090;
         font-size: 0.8rem;
         margin-top: 0.3rem;
-    }
+    }}
 </style>
 
 <div class="music-bar">
     <button class="music-btn" onclick="startMusic()" id="playBtn">
         🎵 Play our song
     </button>
-    <div class="music-label" id="musicLabel">Je te laisserai des mots — Patrick Watson</div>
+    <div class="music-label">Je te laisserai des mots — Patrick Watson</div>
 </div>
 
-<iframe id="yt"
-    src=""
-    allow="autoplay"
-    style="width:1px;height:1px;position:fixed;top:-100px;left:-100px;border:none;">
-</iframe>
+<audio id="player" loop>
+    <source src="data:audio/mp3;base64,{song_b64}" type="audio/mp3">
+</audio>
 
 <script>
-    function startMusic() {
-        document.getElementById('yt').src =
-            "https://www.youtube.com/embed/HgzGwKwLmgM?autoplay=1&loop=1&playlist=HgzGwKwLmgM&controls=0";
+    function startMusic() {{
+        const player = document.getElementById('player');
+        player.play();
         document.getElementById('playBtn').textContent = '🎵 Playing…';
         document.getElementById('playBtn').disabled = true;
         document.getElementById('playBtn').style.opacity = '0.6';
-    }
+    }}
 </script>
 """, height=80)
 
