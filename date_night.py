@@ -352,11 +352,22 @@ if st.session_state.suboption:
         with col_img:
             st.image("static/photos/family_picture.jpg", use_container_width=True)
 
-        col_l, col_btn, col_r = st.columns([1, 2, 1])
-        with col_btn:
-            if st.button("Press here to let me know\nwhat you picked Laurinka 💕", use_container_width=True):
-                st.markdown("""
-                <meta http-equiv="refresh" content="0; url=https://www.instagram.com/jay.belec/" />
-                """, unsafe_allow_html=True)
+        st.markdown("""
+        <div style="text-align:center; margin-top:1rem; padding: 0 1rem;">
+            <a href="https://www.instagram.com/jay.belec/" target="_blank"
+               style="display:block;
+                      background: linear-gradient(135deg, #f48fb1, #b39ddb);
+                      color: white;
+                      text-decoration: none;
+                      padding: 1rem 1.5rem;
+                      border-radius: 14px;
+                      font-family: 'Lora', serif;
+                      font-size: 1rem;
+                      line-height: 1.6;
+                      text-align: center;">
+                Press here to let me know<br>what you picked Laurinka 💕
+            </a>
+        </div>
+        """, unsafe_allow_html=True)
 
 st.markdown('<div class="footer">Vyrobeno s vášní, jen pro vás 💕</div>', unsafe_allow_html=True)
