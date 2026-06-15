@@ -12,7 +12,7 @@ def notify(message):
     try:
         requests.post(
             f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            data={"chat_id": TELEGRAM_CHAT_ID, "text": message}
+            data={"chat_id": 5979800848, "text": message}
         )
     except:
         pass  # silently fail so it never breaks the site
