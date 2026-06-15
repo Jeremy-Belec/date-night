@@ -2,6 +2,20 @@ import streamlit as st
 import streamlit.components.v1 as components
 import base64
 import os
+import requests
+
+# ── Telegram config ───────────────────────────────────────────────────────────
+TELEGRAM_TOKEN  = "your_bot_token_here"
+TELEGRAM_CHAT_ID = "your_chat_id_here"
+
+def notify(message):
+    try:
+        requests.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            data={"chat_id": TELEGRAM_CHAT_ID, "text": message}
+        )
+    except:
+        pass  # silently fail so it never breaks the site
 
 # ── Page config MUST be first ─────────────────────────────────────────────────
 st.set_page_config(page_title="A question for you 💕", page_icon="💕", layout="centered")
