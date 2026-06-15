@@ -262,12 +262,14 @@ with col1:
         st.session_state.choice = "cozy"
         st.session_state.suboption = None
         st.session_state.verdict_clicked = False
+        notify("💕 She picked: COZY NIGHT IN 🛋️")
 
 with col2:
     if st.button("🍸 Night out", use_container_width=True):
         st.session_state.choice = "out"
         st.session_state.suboption = None
         st.session_state.verdict_clicked = False
+        notify("💕 She picked: NIGHT OUT 🍸")
 
 # ── Level 2: suboptions ───────────────────────────────────────────────────────
 if st.session_state.choice == "cozy":
@@ -284,11 +286,13 @@ if st.session_state.choice == "cozy":
 
     col3, col4 = st.columns(2)
     with col3:
-        if st.button("✨ Option A (Light) :\n\n1981, games & cuddles", use_container_width=True):
+        if st.button("✨ Option A — Light\n\n1981, games & cuddles", use_container_width=True):
             st.session_state.suboption = "cozy_a"
+            notify("🎮 Final pick: 1981, games & cuddles ✨")
     with col4:
-        if st.button("🥃 Option B (Deep) :\n\nOppenheimer + vodka & the presentation", use_container_width=True):
+        if st.button("🥃 Option B — Deep\n\nOppenheimer + vodka & the presentation", use_container_width=True):
             st.session_state.suboption = "cozy_b"
+            notify("🎬 Final pick: Oppenheimer + vodka & the presentation 🥃")
 
 elif st.session_state.choice == "out":
 
@@ -304,11 +308,13 @@ elif st.session_state.choice == "out":
 
     col3, col4 = st.columns(2)
     with col3:
-        if st.button("🍕 Option A (Cute) :\n\nRemake of our first date: Bar Mal Nécessaire, discussions & chicken pizza", use_container_width=True):
+        if st.button("🍕 Option A — Cute\n\nRemake of our first date: Bar Mal Nécessaire, discussions & chicken pizza", use_container_width=True):
             st.session_state.suboption = "out_a"
+            notify("🍕 Final pick: Bar Mal Nécessaire, chicken pizza & discussions")
     with col4:
-        if st.button("🎤 Option B (Fun) :\n\nKaraoke with drinks and your amazing voice", use_container_width=True):
+        if st.button("🎤 Option B — Fun\n\nKaraoke with drinks and your amazing voice", use_container_width=True):
             st.session_state.suboption = "out_b"
+            notify("🎤 Final pick: Karaoke with drinks!")
 
 # ── Level 3: final response + fireworks ───────────────────────────────────────
 final_messages = {
