@@ -5,14 +5,14 @@ import os
 import requests
 
 # ── Telegram config ───────────────────────────────────────────────────────────
-TELEGRAM_TOKEN  = "your_bot_token_here"
-TELEGRAM_CHAT_ID = "your_chat_id_here"
+TELEGRAM_TOKEN  = "8637040767:AAGvxhLUxX3uKDswMefCbCknQS5bhxWVX4"
+TELEGRAM_CHAT_ID = "5979800848"
 
 def notify(message):
     try:
         requests.post(
             f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            data={"chat_id": 5979800848, "text": message}
+            data={"chat_id": TELEGRAM_CHAT_ID, "text": message}
         )
     except:
         pass  # silently fail so it never breaks the site
