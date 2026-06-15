@@ -5,7 +5,7 @@ import os
 import requests
 
 # ── Telegram config ───────────────────────────────────────────────────────────
-TELEGRAM_TOKEN  = "8637040767:AAGvxhLUxX3uKDswMefCbCknQS5bhxWVX4"
+TELEGRAM_TOKEN  = "8637040767:AAGvxhLUxX3uKDswMefCbdCknQS5bhxWVX4"
 TELEGRAM_CHAT_ID = "5979800848"
 
 def notify(message):
